@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
 /**
  * Clase MainApp.
  */
@@ -78,4 +77,13 @@ public class MainApp extends Application {
         launch(args);
     }
 
+    /**
+     * Getter del stage.
+     *
+     * @return El stage
+     */
+    public static Stage getStage() {
+		return stage;
+	}
+    
 }
