@@ -56,7 +56,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * carga el FXML.
+     * Carga el FXML.
      *
      * @param fxml El fxml
      * @return El fxml cargado

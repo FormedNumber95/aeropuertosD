@@ -9,36 +9,54 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Persona;
 
+/**
+ * Clase tablaPersonasController.
+ */
 public class tablaPersonasController {
 
+	/** El stage. */
 	private static Stage s;
 	
+    /** El btn aniadir. */
     @FXML
     private Button btnAniadir;
 
+    /** El id tabla apellido. */
     @FXML
-    private static TableColumn<Persona, String> idTablaApellido;
+    private  TableColumn<Persona, String> idTablaApellido;
 
+    /** El id tabla edad. */
     @FXML
-    private static TableColumn<Persona, Integer> idTablaEdad;
+    private TableColumn<Persona, Integer> idTablaEdad;
 
+    /** El id tabla nombre. */
     @FXML
-    private static TableColumn<Persona, String> idTablaNombre;
+    private TableColumn<Persona, String> idTablaNombre;
 
+    /** El tabla personas. */
     @FXML
-    private static TableView<Persona> tablaPersonas=new TableView<Persona>();
+    private TableView<Persona> tablaPersonas=new TableView<Persona>();
 
+    /**
+     * Aniadir persona a la tabla llamando a una ventana modal.
+     *
+     * @param event El evento
+     */
     @FXML
     void aniadirPersona(ActionEvent event) {
     	s=new Stage();
     	Scene scene;
 		try {
-			scene = new Scene(new FXMLLoader(MainApp.class.getResource("/fxml/aniadirPersona.fxml")).load());
+			 FXMLLoader controlador = new FXMLLoader(MainApp.class.getResource("/fxml/aniadirPersona.fxml"));
+			scene = new Scene(controlador.load());
 			s.setTitle("Nueva Persona");
 			s.setScene(scene);
+			aniadirPersonaController controller = controlador.getController();
+			controller.setTablaPersonas(tablaPersonas);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -47,13 +65,24 @@ public class tablaPersonasController {
         s.initModality(javafx.stage.Modality.WINDOW_MODAL);
         s.show();
     }
+    
+    /**
+     * Inicializa el valor de las celdas.
+     */
+    @FXML
+    private void initialize() {
+    	idTablaNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+    	idTablaApellido.setCellValueFactory(new PropertyValueFactory<>("apellidos"));
+    	idTablaEdad.setCellValueFactory(new PropertyValueFactory<>("edad"));
+    }
 
+	/**
+	 * Getter del stage.
+	 *
+	 * @return El stage
+	 */
 	public static Stage getS() {
 		return s;
-	}
-
-	public static TableView<Persona> getTablaPersonas() {
-		return tablaPersonas;
 	}
     
 }

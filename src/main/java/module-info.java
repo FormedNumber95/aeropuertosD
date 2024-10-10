@@ -4,4 +4,5 @@ module es.aketzagonzalez {
     requires javafx.media;
     opens es.aketzagonzalez.aeropuertosD to javafx.fxml;
     exports es.aketzagonzalez.aeropuertosD;
+    exports model;
 }
